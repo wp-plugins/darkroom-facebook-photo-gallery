@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: facebook, photos, images, gallery, fotobook, import, widget, media, darkroom, developing, line, pin, 
 Requires at least: 2.6
 Tested up to: 3.3.1
-Stable tag: 0.9
+Stable tag: 1.0
 
 The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality.
 
@@ -18,18 +18,20 @@ Upload them from your mobile to Facbook as usual, and they will show in your Wor
 See features below for a description of the level of customization that enables you to change this "Darkroom" concept/style into your own.
 This plugin is based on the Fotobook plugin by Aaron Harp and Chris Wright, and was possible thanks to the jQuery tutorial by Manoela Ilic.
    
-**Darkroom Features:**
+= Darkroom Features: =
+
 * Option to hang the photos from different corners
 * Option to rotate the photos a fixed amount or using its gravity
 * Option to add random rotation to the photos
-* Option to change the color of overlay
-, hanging the photos from different corners, using your own clips, pins, or other image and adjust the point of grip, as well as the center of rotation/hanging-point of the photos, using their own gravity or a fixed rotation, and more.
+* Option to change the color of overlay, hanging the photos from different corners, using your own clips, pins, or other image and adjust the point of grip, as well as the center of rotation/hanging-point of the photos, using their own gravity or a fixed rotation, and more.
 
-**Options for sale**
+= Options for sale =
+
 * Fullscreen option (takes over the browser&rsquo;s window making the effect cooler and animations smoother.
 * In-dashboard css, background, and pin photo editors so you can make your own theme with hanging photos!
 
-**Fotobook Features:** (from Fotobook Plugin)
+= Fotobook Features (from Fotobook Plugin) =
+
 * Interfaces with Facebook's API
 * Displays photo albums on a WordPress page
 * Import photos from mulitple Facebook accounts
@@ -44,21 +46,20 @@ This plugin is based on the Fotobook plugin by Aaron Harp and Chris Wright, and 
 == Installation ==
 
 This installation is for any other than the easy "install" button at your Dashboard/Plugins/Add New/Search page, of course.
+
 1. Download and unzip
 2. Upload the entire darkroom-facebook-photo-gallery folder to /your-wordpress-install-dir/wp-content/plugins/
 3. Login to your WP Admin panel, click Plugins, and activate Fotobook
 4. Go to Options and then click the Fotobook link. Follow the two steps for linking the plugin to a Facebook account.
 5. Now import your albums on the Manage / Fotobook page.
-6. That's it!
+6. Upload your logo (or choose not to use it) and other options in the "Darkroom" Dashboard's settings page
 
 It works better in fluid layouts. If you can, just copy your page's template and make it fluid to use it just with the gallery's page. The more width is available the less-crowded the photos will appear when the albums get expanded.
-
-To upgrade simply replace the old Fotobook directory with the newest version.  Re-import all of your albums to complete the upgrade.
 
 == Screenshots ==
 
 1. Here's the Darkroom style, but you could change it into a new concept by using different pins, clips, and styling.
-1. This new style was the original idea achieved for a [famous Daylight Swordfishing Charter](http://www.floridakeysswordfishing.com) - soon online
+2. This new style was the original idea achieved for a [famous Daylight Swordfishing Charter](http://www.floridakeysswordfishing.com) - soon online
 
 == Changelog ==
 

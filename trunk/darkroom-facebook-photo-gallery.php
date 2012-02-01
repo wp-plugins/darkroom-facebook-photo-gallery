@@ -6,7 +6,7 @@ Description: The first Facebook Photo Album -to- jQuery-animated gallery for Wor
 <strong>Requires PHP 5</strong>
 Author: SocialBlogsite
 Author URI: http://socialblogsitewebdesign.com/about
-Version: 0.9
+Version: 1.0
 */
 
 /*
@@ -60,12 +60,14 @@ $fb_message = null;
 
 function fb_admin_scripts() {
 	wp_enqueue_style('fotobook-css', FB_PLUGIN_URL.'styles/admin-styles.css');
-	wp_enqueue_script('fotobook-js', FB_PLUGIN_URL.'js/admin.js', array('jquery', 'jquery-ui-sortable'), FB_VERSION);
+	wp_register_script('fotobook-js', FB_PLUGIN_URL.'js/admin.js', array('jquery', 'jquery-ui-sortable','media-upload','thickbox'), FB_VERSION);
+	wp_enqueue_script('fotobook-js');
+	wp_enqueue_style('thickbox');
 	//wp_enqueue_script('colorbox', FB_PLUGIN_URL.'styles/colorbox/js/colorbox.js');
 	//wp_enqueue_script('colorbox', FB_PLUGIN_URL.'styles/colorbox/js/colorbox.js');
 	//wp_enqueue_style('colorbox', FB_PLUGIN_URL.'styles/colorbox/colorbox.css');
-	wp_enqueue_style('thickbox');
 }
+
 add_action('load-fotobook/manage-fotobook.php', 'fb_admin_scripts');
 add_action('load-fotobook/options-fotobook.php', 'fb_admin_scripts');
 
@@ -1110,7 +1112,6 @@ function fb_display_main($content, $page_id) {
 	<img id="fp_background" src="<?php echo FB_STYLE_URL.'_img/back.jpg'; ?>" alt=""/>
     <a id="gallery_logo" href="<?php bloginfo('url'); ?>"><img src="<?php echo ( $fb_uselogo && get_option('fb_logo_image') ) ? get_option('fb_logo_image') : FB_PLUGIN_URL . "my_logo.png"; ?>" alt="home" /></a>
     <div id="fp_photo-description">
-    <?php /*?>Premium code<?php */?>
     	<div id="fp_report-content"></div>
     </div>
     
@@ -1713,7 +1714,6 @@ add_filter('the_content', 'fb_display');
 add_action('widgets_init', 'fb_widget_init');
 add_action('template_redirect', 'fb_display_scripts');
 add_action('wp_print_styles', 'fb_display_styles');
-//add_action('wp_print_scripts', 'fb_print_scripts');
 add_action('wp_ajax_fotobook', 'fb_ajax_handler');
 
 //---------------------//
