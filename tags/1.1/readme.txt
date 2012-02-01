@@ -64,6 +64,9 @@ It works better in fluid layouts. If you can, just copy your page's template and
 
 == Changelog ==
 
+= 1.1 =
+Attempt to fix "The plugin does not have a valid header." error when attempting easy install
+
 = 1.0 =
 Fixed some spelling (more to be found! English is not my first language, sorry)
 Missing wp-upload-media scripts which fixes "upload logo" button.
