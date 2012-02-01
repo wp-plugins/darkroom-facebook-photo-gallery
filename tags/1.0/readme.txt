@@ -10,6 +10,7 @@ The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Custo
 
 == Description ==
 
+[Live Demo](http://socialblogsitewebdesign.com/portfolio)
 Why uploading your photos to both facebook and Wordpress? With this plugin you can keep them where your friends are already liking them, and displaying them in your website with the best interface neither facebook or WordPress offer.
 Facebook Darkroom Photo Gallery is a fully animated jQuery photo gallery, inially styled as a darkroom photo drying line, with clothe pins and gravity-hung photos.
 Each photo features title, SEO keywords and description, as well as album titles and cool effects!
