@@ -2,11 +2,10 @@
 /*
 Plugin Name: Darkroom facebook photo gallery
 Plugin URI: http://socialblogsitewebdesign.com/wordpress_plugins/darkroom-facebook-photo-gallery
-Description: The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality. Works with fb page albums.
-<strong>Requires PHP 5</strong>
+Description: The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality. Works with fb page albums. Requires PHP 5.
 Author: SocialBlogsite
 Author URI: http://socialblogsitewebdesign.com/about
-Version: 1.0
+Version: 1.1
 */
 
 /*

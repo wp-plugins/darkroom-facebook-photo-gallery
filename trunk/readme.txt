@@ -1,10 +1,10 @@
 === Darkroom Facebook Photo Gallery ===
 Contributors: SocialBlogsite, Sergio Zambrano
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EHE67MABZCGV2
-Tags: facebook, photos, images, gallery, fotobook, import, widget, media, darkroom, developing, line, pin, 
+Tags: facebook, photos, images, gallery, fotobook, import, widget, media, darkroom, developing, line, pin
 Requires at least: 2.6
 Tested up to: 3.3.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality.
 
@@ -63,6 +63,9 @@ It works better in fluid layouts. If you can, just copy your page's template and
 2. This new style was the original idea achieved for a [famous Daylight Swordfishing Charter](http://www.floridakeysswordfishing.com) - soon online
 
 == Changelog ==
+
+= 1.1 =
+Attempt to fix "The plugin does not have a valid header." error when attempting easy install
 
 = 1.0 =
 Fixed some spelling (more to be found! English is not my first language, sorry)
