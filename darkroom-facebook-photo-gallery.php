@@ -5,7 +5,7 @@ Plugin URI: http://socialblogsitewebdesign.com/wordpress_plugins/darkroom-facebo
 Description: The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality. Works with fb page albums. Requires PHP 5.
 Author: SocialBlogsite
 Author URI: http://socialblogsitewebdesign.com/about
-Version: 1.2
+Version: 1.3
 */
 
 /*
@@ -37,8 +37,8 @@ define('FB_PLUGIN_PATH', plugin_dir_path(__FILE__) );
 define('FB_PLUGIN_URL', plugin_dir_url(__FILE__) );
 define('FB_STYLE_URL', FB_PLUGIN_URL.'styles/'.get_option('fb_style').'/');
 define('FB_STYLE_PATH', FB_PLUGIN_PATH.'styles/'.get_option('fb_style').'/');
-define('FB_MANAGE_URL', (get_bloginfo('version') >= 2.7 ? 'media-new.php' : 'edit.php') .'?page=darkroom/manage-fotobook.php');
-define('FB_OPTIONS_URL', 'options-general.php?page=darkroom/options-fotobook.php');
+define('FB_MANAGE_URL', (get_bloginfo('version') >= 2.7 ? 'media-new.php' : 'edit.php') .'?page=darkroom-facebook-photo-gallery/manage-darkroom.php');
+define('FB_OPTIONS_URL', 'options-general.php?page=darkroom-facebook-photo-gallery/options-darkroom.php');
 define('FB_WEBSITE', 'http://socialblogsitewebdesign.com/wordpress_plugins/darkroom-facebook-photo-gallery');
 define('FB_VERSION', 3.22);
 define('FB_DONATE', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EHE67MABZCGV2');
@@ -67,8 +67,8 @@ function fb_admin_scripts() {
 	//wp_enqueue_style('colorbox', FB_PLUGIN_URL.'styles/colorbox/colorbox.css');
 }
 
-add_action('load-fotobook/manage-fotobook.php', 'fb_admin_scripts');
-add_action('load-fotobook/options-fotobook.php', 'fb_admin_scripts');
+add_action('load-darkroom-facebook-photo-gallery/manage-darkroom.php', 'fb_admin_scripts');
+add_action('load-darkroom-facebook-photo-gallery/options-darkroom.php', 'fb_admin_scripts');
 
 
 //--------------------//
@@ -497,6 +497,7 @@ function fb_initialize() {
 	add_option('fb_linkhate', 0);
 
 
+
 	$photo_table_query = "CREATE TABLE `".FB_PHOTO_TABLE."` (
 	                        `pid` varchar(40),
 	                        `aid` varchar(40),
@@ -612,10 +613,10 @@ function fb_upgrade_tables() {
 
 function fb_add_pages() {
 	if(get_bloginfo('version') >= 2.7)
-		add_media_page('Media &rsaquo; Darkroom', 'Darkroom', 8, 'fotobook/manage-fotobook.php');
+		add_media_page('Media &rsaquo; Darkroom', 'Darkroom', 8, 'darkroom-facebook-photo-gallery/manage-darkroom.php');
 	else
-		add_management_page('Manage &rsaquo; Darkroom', 'Darkroom', 8, 'fotobook/manage-fotobook.php');
-	add_options_page('Settings &rsaquo; Darkroom', 'Darkroom', 8, 'fotobook/options-fotobook.php');
+		add_management_page('Manage &rsaquo; Darkroom', 'Darkroom', 8, 'darkroom-facebook-photo-gallery/manage-darkroom.php');
+	add_options_page('Settings &rsaquo; Darkroom', 'Darkroom', 8, 'darkroom-facebook-photo-gallery/options-darkroom.php');
 }
 
 function fb_action_link($actions) {
@@ -1105,11 +1106,15 @@ function fb_display_main($content, $page_id) {
 
 
 			// loops through albums (former include) ---------------------------------
+
 ?>
             
 <div id="fp_body-gallery" class="captive">
 	<img id="fp_background" src="<?php echo FB_STYLE_URL.'_img/back.jpg'; ?>" alt=""/>
-    <a id="gallery_logo" href="<?php bloginfo('url'); ?>"><img src="<?php echo ( $fb_uselogo && get_option('fb_logo_image') ) ? get_option('fb_logo_image') : FB_PLUGIN_URL . "my_logo.png"; ?>" alt="home" /></a>
+			<a id="gallery_logo" href="<?php echo $albums[1]['link'] ; ?>" target="_blank">
+			<?php echo ( $fb_uselogo ) ? "<img src='$fb_logo_image' alt='Facebook user logo' />" : "Browse in Facebook"; ?>
+            </a>
+        
     <div id="fp_photo-description">
     	<div id="fp_report-content"></div>
     </div>
@@ -1705,8 +1710,9 @@ function fb_albums_widget_control() {
 
 
 add_filter('wp_list_pages_excludes', 'fb_hidden_pages');
-add_action('activate_fotobook/fotobook.php', 'fb_initialize');
-add_action('plugin_action_links_fotobook/fotobook.php', 'fb_action_link');
+//add_action('activate_fotobook/darkroom-facebook-photo-gallery.php', 'fb_initialize');
+register_activation_hook( __FILE__, 'fb_initialize' );
+add_action('plugin_action_links_darkroom-facebook-photo-gallery/darkroom-facebook-photo-gallery.php', 'fb_action_link');
 add_action('admin_menu', 'fb_add_pages');
 add_filter('the_content', 'fb_display');
 //add_action( 'wp_footer', 'fb_fullscreen' );
