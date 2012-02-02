@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: facebook, photos, images, gallery, fotobook, import, widget, media, darkroom, developing, line, pin
 Requires at least: 2.6
 Tested up to: 3.3.1
-Stable tag: 1.1
+Stable tag: 1.2
 
 The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality.
 
@@ -63,6 +63,9 @@ It works better in fluid layouts. If you can, just copy your page's template and
 2. This new style was the original idea achieved for a [famous Daylight Swordfishing Charter](http://www.floridakeysswordfishing.com) - soon online
 
 == Changelog ==
+
+= 1.2 = 
+Same than 1.1, but uploaded it to the right place. I happened to upload the whole tags and trunk directories inside trunk, just because this time wordpress sent me the confirmation email with the url of my plugin including /trunk. So Everithing was inside trunk. Nice. he ones who downloaded it probably noticed it. My apologies to the others. I wonder how even WP server saw it as a working download-able version! (It even shown the correct version :S )
 
 = 1.1 =
 Attempt to fix "The plugin does not have a valid header." error when attempting easy install
