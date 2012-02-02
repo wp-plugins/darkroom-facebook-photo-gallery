@@ -116,6 +116,7 @@ span.reference a{
 	display: inline;
 	border-radius: 4px;
 	font-weight: bold;
+	font-size: 14px;
 }
 .fp_back{
 	background:#222;
@@ -508,9 +509,15 @@ padding-left: 220px;
 	top: 10px;
 }
 #gallery_logo {
-	position:absolute;
+	position: absolute;
 	left: 20px;
 	top: 20px;
+	z-index: 9999;
+	color: #CCAEAA;
+	font-size: 12px;
+}
+#gallery_logo:hover {
+	color: #fff;
 }
 .captive #gallery_logo img {
 	max-width: 150px;
