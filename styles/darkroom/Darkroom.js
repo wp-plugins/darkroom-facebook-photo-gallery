@@ -30,7 +30,7 @@
 	var rotating_point_x = hanging_point_x + photo_border;
 	var rotating_point_y = hanging_point_y + photo_border;
 
-	//Premium Code
+	//Premium Code	
 	
 
 	function spread_albums() {
@@ -210,7 +210,7 @@
 		current 				= $content.index();
 		var $thumb				= $content.find('img');
 		var imgL_source 	 	= $thumb.attr('rel');
-		var imgL_title		 	= $thumb.next().html();
+		var imgL_title		 	= ($thumb.attr('title')) ? $thumb.attr('title') : '';
 		$.imgL_description 	= $content.find('.fp_photo-caption').html();
 		//preload the large image to show
 		$('<img style=""/>').load(function(){

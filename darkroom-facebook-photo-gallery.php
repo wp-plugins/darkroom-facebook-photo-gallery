@@ -1200,11 +1200,18 @@ function fb_display_album($page_id) {
 		foreach($photos as $key=>$photo):
 		$breaking_str = "\n\n";
 		$clean_caption = preg_replace('/[\r\n]+/', "\n\n", $photo['caption']);
-		$photo_parts = explode($breaking_str, $clean_caption, 3);
+		
+		if ( strpos( $clean_caption, $breaking_str) ) {
+			$photo_parts = explode($breaking_str, $clean_caption, 3);
 
-		$photo_title = $photo_parts[0];
-		$photo_keywords = $photo_parts[1];
-		$photo_report = wpautop($photo_parts[2]);
+			$photo_title = $photo_parts[0];
+			$photo_keywords = $photo_parts[1];
+			$photo_report = wpautop($photo_parts[2]);
+		} else {
+			$photo_title = $clean_caption;
+			$photo_keywords = $clean_caption;
+			$photo_report = '';
+		}
 ?>
             <div class="content rand-<?php echo rand(1,3); ?>">
                 <div class="sub-content">
