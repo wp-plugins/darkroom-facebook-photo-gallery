@@ -74,7 +74,7 @@ To take advantage of SEO keywords, make sure you separate your Facebook photo ca
 
 == Changelog ==
 
-= 1.3 = 
+= 1.4 = 
 Optimized for speed
 
 = 1.3 = 
