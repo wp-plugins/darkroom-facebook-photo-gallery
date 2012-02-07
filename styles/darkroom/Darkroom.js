@@ -30,7 +30,20 @@
 	var rotating_point_x = hanging_point_x + photo_border;
 	var rotating_point_y = hanging_point_y + photo_border;
 
-	//Premium Code	
+	//
+	$('#expand_gallery').click( function() {
+		$gallery_parent = $('#fp_body-gallery').parent(); 
+		$('#fp_body-gallery').removeClass('captive').prependTo('body');
+		$('body').addClass('fb_darkroom');
+		$('body *').not('#fp_body-gallery, #fp_body-gallery *').addClass('fb_hidden');
+		spread_albums();
+	});
+
+	$('#collapse_gallery').click( function() {
+		$('body *').not('#fp_body-gallery, #fp_body-gallery *').removeClass('fb_hidden');
+		$('body').removeClass('fb_darkroom');
+		$('#fp_body-gallery').addClass('captive').prependTo($gallery_parent);
+	});
 	
 
 	function spread_albums() {
@@ -127,16 +140,18 @@
 		
 		//hide all the other albums
 		$albums
-			.not($album)
+			.not($album).not('.aside')
 				.stop()
 				.addClass('aside')
 				.each( function() {
 					var width_px = $(this).parent().width;
 					$(this)
-						.animate({'top':'260px', 'left':$(this).data('left')+'%', 'width':$(this).data('width')+'%'},500)
+						.addClass('aside moving')
+						.animate({'top':'260px', 'left':$(this).data('left')+'%', 'width':$(this).data('width')+'%'},500, function() {
+								$(this).removeClass('moving');
+						})
 						.unbind('click')
 						.bind('click',spreadPictures)
-						.removeAttr('overflow')
 				}).find('.content')
 				.each(function(){
 					$(this)
@@ -147,12 +162,12 @@
 
 		$album.unbind('click');
 		//now move the current album to the left 
-		//and at the same time spread its images through 
-		//the window, rotating them randomly. Also hide the description of the album
+		//and at the same time spread its images through the window
 				
 		$album.stop()
-			.animate({'left':'0%', 'width':'100%', 'top':'0px' },1000, function() {
-			$(this).removeClass('aside')
+			.addClass('moving')
+			.animate({'left':'0%', 'width':'100%', 'top':'0px' },500, function() {
+			$(this).removeClass('aside moving')
 			})
 			.find('.descr').unbind('click');
 		
@@ -186,7 +201,7 @@
 				enableshow = true;
 				return;
 			}
-			var $content 			= $('#fp_thumbContainer div.album:nth-child('+parseInt(album+1)+')')
+			var $content = $('#fp_thumbContainer div.album:nth-child('+parseInt(album+1)+')')
 									  .find('.content:nth-child('+parseInt(current)+')');
 			//reached the last one
 			if($content.length==0){

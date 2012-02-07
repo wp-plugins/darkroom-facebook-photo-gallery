@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: facebook, photos, images, gallery, fotobook, import, widget, media, darkroom, developing, line, pin
 Requires at least: 2.6
 Tested up to: 3.3.1
-Stable tag: 1.3
+Stable tag: 1.4
 
 The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality.
 
@@ -25,6 +25,10 @@ This plugin is based on the Fotobook plugin by Aaron Harp and Chris Wright, and 
 * Option to rotate the photos a fixed amount or using its gravity
 * Option to add random rotation to the photos
 * Option to change the color of overlay, hanging the photos from different corners, using your own clips, pins, or other image and adjust the point of grip, as well as the center of rotation/hanging-point of the photos, using their own gravity or a fixed rotation, and more.
+
+= Future features =
+
+*Better Internet Explorer compatibility (current version works better in modern browsers, e.g. Chrome, Firefox, Safari)
 
 = Options for sale =
 
@@ -55,7 +59,13 @@ This installation is for any other than the easy "install" button at your Dashbo
 5. Now import your albums on the Manage / Fotobook page.
 6. Upload your logo (or choose not to use it) and other options in the "Darkroom" Dashboard's settings page
 
-It works better in fluid layouts. If you can, just copy your page's template and make it fluid to use it just with the gallery's page. The more width is available the less-crowded the photos will appear when the albums get expanded.
+It works better in fluid layouts. If you can, just copy your page's template and make it fluid to use it with the gallery's page only. The more width is available the less-crowded the photos will appear when the albums get expanded.
+
+To take advantage of SEO keywords, make sure you separate your Facebook photo captions into three parts, with an empty line between them (two carriage returns) as follow:
+
+* **1st. line:** Photo title: Used for enlarged photo's caption and in thumbnail's alt attribute. Keep it as short as the photo's width.
+* **2nd. line:** SEO tags: Used in the title attribute (the one revealed when the image is hovered).
+* **3rd. line:** Photo description: Displayed at the top right of the gallery when an image is enlarged.
 
 == Screenshots ==
 
@@ -63,6 +73,9 @@ It works better in fluid layouts. If you can, just copy your page's template and
 2. This new style was the original idea achieved for a [famous Daylight Swordfishing Charter](http://www.floridakeysswordfishing.com) - soon online
 
 == Changelog ==
+
+= 1.3 = 
+Optimized for speed
 
 = 1.3 = 
 Some workarounds for cheap hosting messing with options page not loading
