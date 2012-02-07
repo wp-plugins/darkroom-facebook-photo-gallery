@@ -484,8 +484,8 @@ function fb_initialize() {
 	add_option('fb_hide_pages', 0);
 	add_option('fb_photo_border', 3);
 	add_option('fb_hanging_side', 'left');
-	add_option('fb_hanging_point_x', 15);
-	add_option('fb_hanging_point_y', 15);
+	add_option('fb_hanging_point_x', 10);
+	add_option('fb_hanging_point_y', 10);
 	add_option('fb_pin_grip_x', 8);
 	add_option('fb_pin_grip_y', 38);
 	add_option('fb_initial_angle', 0);
