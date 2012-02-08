@@ -94,9 +94,6 @@ span.reference a{
 	position: relative;
 	margin-top: 167px;/*Adjust this to match your pin with the line*/
 }
-.captive #fp_thumbContainer {
-	margin-left: 0px;
-}
 #fp_thumbContainer .album{
 	position:absolute;
 	width:25%;
@@ -105,7 +102,7 @@ span.reference a{
 	overflow: visible;
 }
 .album .descr {
-	background: #C76;
+	background: #D88;
 	text-align: center;
 	border: 1px solid #300;
 	cursor: pointer;
@@ -505,7 +502,8 @@ padding-left: 220px;
 	top: 80px;
 }
 .captive #fp_thumbContainer {
-	margin-top: 40px;
+	margin-top: 50px;
+	margin-left: 0px;
 }
 .captive #fp_photo-description {
 	text-align: center;
