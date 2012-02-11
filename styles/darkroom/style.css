@@ -162,6 +162,11 @@ span.reference a{
 	box-shadow: 1px 1px 7px #400, inset 0 0 60px 5px #810;
 	position: absolute;
 	top: 0px;
+	right: 0px;
+}
+.vertical .thumb-frame {
+	left : 0px;
+	right: auto;
 }
 .selected .thumb-frame {
 	background-color: transparent;
@@ -201,7 +206,7 @@ span.reference a{
 .fp_descr{
 	height:45px;
 	line-height:45px;
-	font-size:20px;
+	font-size:15px;
 	width:100%;
 	bottom:0px;
 	left:0px;
