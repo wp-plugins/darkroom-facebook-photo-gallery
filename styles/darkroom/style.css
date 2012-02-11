@@ -431,6 +431,7 @@ padding-left: 220px;
 .sub-album {
 	position: relative;
 	display: block;
+	margin: 0 60px;
 }
 .descr_cont {
 	text-align: center;
