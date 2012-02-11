@@ -1,10 +1,6 @@
 /* ------------- Photo Gallery -------------- */
 
-#fp_body-gallery p,
-#fp_body-gallery br {
-	margin:0;
-	padding:0;
-}
+
 #fp_body-gallery div {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -22,6 +18,10 @@
 	position: fixed;
 	background-color:#000;
 }
+#fp_body-gallery.captive {
+	height: auto;
+	position: relative;
+}
 #fp_background {
 	position: absolute;
 	left: 0px;
@@ -38,6 +38,7 @@
 }
 .captive #fp_gallery {
 	min-height: 560px;
+	height: auto;
 }
 span.reference{
 	font-family:Arial;
@@ -102,7 +103,7 @@ span.reference a{
 	overflow: visible;
 }
 .album .descr {
-	background: #D88;
+	background: #C76;
 	text-align: center;
 	border: 1px solid #300;
 	cursor: pointer;
@@ -135,7 +136,11 @@ span.reference a{
 	height:50px;
 	cursor:pointer;
 }
-.moving .thumb-frame {
+#fp_thumbContainer .content.selected {
+	z-index: 60;
+}
+.moving .thumb-frame,
+.selected.moving .thumb-frame {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
@@ -144,6 +149,10 @@ span.reference a{
 .moving .thumb-frame img {
 	z-index: auto;
 	opacity: .45;
+}
+.selected.moving .thumb-frame {
+	z-index: auto;
+	opacity: 1;
 }
 .thumb-frame {
 	background-color: transparent;
@@ -163,13 +172,14 @@ span.reference a{
 }
 .selected div.thumb-frame img {
 	opacity: 1;
+	z-index: auto;
 }
 
 .thumb-frame img {
 	position: relative;
 	z-index: -1;
 }
-#fp_thumbContainer span{
+#fp_thumbContainer p.fb_thumbtitle{
 	display:none;
 }
 .fp_preview{
@@ -198,6 +208,11 @@ span.reference a{
 	position:absolute;
 	text-align:center;
 	color:#00021c;
+}
+.fp_descr p {
+	height:45px;
+	line-height:45px;
+	margin: 0 10px;
 }
 .fp_close {
 }
@@ -261,9 +276,6 @@ span.reference a{
   padding: 6px;
   border: solid 1px #ccc;
 }
-
-#fotobook-album img:hover {
-  border: solid 1px #3B5998; }
   
 #fotobook-info {
   font-size: 10px;
@@ -403,6 +415,10 @@ padding-left: 220px;
 	width: 30px;
 	height: 30px;
 	top: -15px;
+	-webkit-transform: rotate(-53); 
+}
+.vertical.sub-content {
+	-webkit-transform: rotate(37); 
 }
 .decr_cont {
 	position: absolute;
@@ -431,7 +447,7 @@ padding-left: 220px;
 	left: 0px;
 	top: -250px;
 }
-#fp_thumbContainer span.pin {
+#fp_thumbContainer div.pin {
 	background-image: url(_img/pin1.png);
 	background-repeat: no-repeat;
 	background-position: left top;
@@ -441,17 +457,17 @@ padding-left: 220px;
 	height: 50px;
 	width: 50px;
 }
-#fp_thumbContainer .rand-2 span.pin {
+#fp_thumbContainer .rand-2 div.pin {
 	background-image: url(_img/pin2.png);
 }
-#fp_thumbContainer .rand-3 span.pin {
+#fp_thumbContainer .rand-3 div.pin {
 	background-image: url(_img/pin3.png);
 }
-#fp_thumbContainer .album.aside span.pin,
-#fp_thumbContainer .content.aside span.pin {
+#fp_thumbContainer .album.aside div.pin,
+#fp_thumbContainer .content.aside div.pin {
 	display: none;
 }
-#fp_thumbContainer .content.vertical span.pin {
+#fp_thumbContainer .content.vertical div.pin {
 }
 #fp_thumbContainer .content.vertical {
 }
@@ -502,8 +518,9 @@ padding-left: 220px;
 	top: 80px;
 }
 .captive #fp_thumbContainer {
-	margin-top: 50px;
+	margin-top: 60px;
 	margin-left: 0px;
+	margin-right: 0px;
 }
 .captive #fp_photo-description {
 	text-align: center;
@@ -514,11 +531,12 @@ padding-left: 220px;
 }
 #gallery_logo {
 	position: absolute;
-	left: 20px;
-	top: 20px;
+	left: 14px;
+	top: 10px;
 	z-index: 9999;
 	color: #CCAEAA;
 	font-size: 12px;
+	line-height: 18px;
 }
 #gallery_logo:hover {
 	color: #fff;
@@ -530,8 +548,8 @@ padding-left: 220px;
 }
 #fp_body-gallery #linklove {
 	position: absolute;
-	right: 5px;
-	bottom: 5px;
+	right: 0px;
+	bottom: 0px;
 }
 .fb_hidden {
 	display: none!important;
@@ -539,6 +557,23 @@ padding-left: 220px;
 body.fb_darkroom {
 	
 }
-#fp_body-gallery.captive {
-	position: relative;
+#gallery_logo.nologo {
+	background-image: url(_img/albums_icon.png);
+	background-repeat: no-repeat;
+	background-position: -99px top;
+	display: block;
+	height: 84px;
+	width: 95px;
+	text-indent: -3000px;
+}
+#gallery_logo.nologo:hover {
+	background-position: left top;
+}
+.captive #gallery_logo.nologo {
+	background-position: -248px top;
+	width: 48px;
+	height: 42px;
+}
+.captive #gallery_logo.nologo:hover {
+	background-position: -198px top;
 }

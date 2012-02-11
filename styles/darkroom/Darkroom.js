@@ -24,7 +24,7 @@
 	$.open_album = '';
 	
 	//Darkroom variables
-	var base_margin = 100; //set margin for 4-album view. When more than 4 albums are displayed, the width will be prorated
+	var base_margin = 100;
 	var rotating_point_x = -( hanging_point_x + (photo_border*2) );
 	var rotating_point_y = -( hanging_point_y + (photo_border*2) );
 	var rotating_point_x = hanging_point_x + photo_border;
@@ -47,13 +47,20 @@
 	
 
 	function spread_albums() {
-		// Reduces margin when more than 4 albums, but stays the same for less than 3.
-		var margin_width = Math.min( ((base_margin / nmb_albums)*4), base_margin);
-		var available_width = ( $('#fp_body-gallery').width()-(margin_width*(nmb_albums*2)) );
-		var images_width_px = available_width / nmb_images;
+		var required_width = nmb_albums*base_margin*2;
+		var available_width = $('#fp_body-gallery').width();
+		var extra_width = available_width - required_width;
+		if( $('#fp_body-gallery').width() - required_width > required_width ) {
+			var margin_width = base_margin;
+			var images_width_px = extra_width / nmb_images;
+		} else {
+			var margin_width = Math.max( base_margin + (extra_width/(nmb_albums)), -(base_margin/2) );
+			var images_width_px = 0;
+		}
 		$.previous_albums = 0;
 		
 		$('.sub-album').css({'marginLeft' : margin_width+'px', 'marginRight' : margin_width+'px'});
+		//$('.sub-album').animate({'marginLeft' : margin_width+'px', 'marginRight' : margin_width+'px'},500);
 		
 		$albums.each(function(){
 			var $album 	= $(this);
@@ -61,8 +68,8 @@
 			var total_pic 	= $album.find('.content').length;
 			var album_width_px = images_width_px * total_pic + (margin_width*2);
 			//alert(available_width);
-			var album_width	= album_width_px / $('#fp_body-gallery').width() * 100;
-			
+			var album_width	= ( images_width_px > 0) ? album_width_px * 100 / $('#fp_body-gallery').width() : 100 / nmb_albums;
+
 			var album_left = $.previous_albums;
 
 			//$.albums_width[i] = album_width;//storing album width
@@ -87,7 +94,7 @@
 			//window width
 			var image_left 	= 100/(total_pic)*cnt_contents;
 			++cnt_contents;
-			$content.stop().animate({'left':image_left+'%'},500);
+			$content.stop().animate({'left':image_left+'%'},100);
 });
 		
 		
@@ -114,6 +121,7 @@
 			//$('#debug').html( $('#debug').html() + '<br/>' + imagenumber );
 
 			$cadaimagen.attr('src', $image.attr('src')).parent().parent().transform({'rotate' : rotation + 'deg'});
+			$image.data('rotame', rotation );
 		});
 	});
 		
@@ -145,6 +153,8 @@
 				.addClass('aside')
 				.each( function() {
 					var width_px = $(this).parent().width;
+					$(this).find('.sub-album').animate({'marginLeft' : base_margin+'px', 'marginRight' : base_margin+'px'},500);
+
 					$(this)
 						.addClass('aside moving')
 						.animate({'top':'260px', 'left':$(this).data('left')+'%', 'width':$(this).data('width')+'%'},500, function() {
@@ -237,7 +247,7 @@
 			var $preview = $('<div />',{
 				'id'		: 'fp_preview',
 				'class'		: 'fp_preview',
-				'html'     	: '<span class="fp_close_x"></span><div class="fp_descr"><span>'+imgL_title+'</span></div>',
+				'html'     	: '<div class="fp_close_x"></div><div class="fp_descr"><p>'+imgL_title+'</p></div>',
 				'style'		: 'visibility:hidden;'
 			});
 			
@@ -319,7 +329,7 @@
 	
 	//shows the navigation buttons
 	function showNavigation(){
-		$('span.fp_close_x').bind('click',function(){
+		$('div.fp_close_x').bind('click',function(){
 			hideCurrentPicture();
 		});
 		$next.stop().animate({'right':'0px'},100);
@@ -339,52 +349,61 @@
 	//mouseenter event on each thumb
 	function upImage(e){
 		var $content 	= $(this);
-		var half_width = $content.find('img').width()/2;
-		var horiz_adjust = ( $content.find('.sub-content').hasClass('vertical') ^ hanging_side == 'right' ) ? -half_width : half_width ;
-			
+		var $theimage = $content.find('img');
 		mX = e.pageX;
 		mY = e.pageY;
-		$theimage = $content.find('img');
+		var rotation = $theimage.data('rotame')*-1;
 		var over_distance = calculateDistance( $theimage, mX, mY);
 		$content.data('distance' , over_distance );
-		
+		if (typeof espera !== "undefined") { if (espera) {// clearTimeout(espera); espera = null;
+			//$content.addClass('selected');
+		}// else {
+		if( ! $content.hasClass('selected') ) {
 		$content
-			.addClass('selected')
-			.css('z-index', '60')
-			.addClass('aside')
-			.find('.sub-content')
+			.addClass('selected moving aside')
+				.find('.thumb-frame')
 				.stop()
-				.animate({'marginLeft' : horiz_adjust+'px', 'rotate': '0deg'},200 );
+				.animate({'rotate': rotation+'deg' },200, function() {
+					$content.removeClass('moving');																		
+				});
+			}
+		}
 	}
 	    
 	//mouseleave event on each thumb
 	function downImage(e){
 		var $content = $(this);
-		var $laimagen = $content.find('img');
+		var $theimage = $content.find('img');
 		
 		mX = e.pageX;
 		mY = e.pageY;
 		$theimage = $content.find('img');
 		var curr_distance = calculateDistance( $theimage, mX, mY);
 		var prev_distance = $content.data('distance');
-		var rotation = rotate_picture($laimagen);
 		if ( curr_distance >= prev_distance ) {
-			$content.removeClass('selected');
-			$content.css('z-index','').find('.sub-content')
-				.stop()
-				.animate({
-					'marginLeft' : '0px', 'rotate': rotation+'deg'},400, function(){
-					$(this).parent().removeClass('aside');
-				});
+			if (typeof espera !== "undefined" && !$content.hasClass('selected') ) clearTimeout(espera);
+			$content.removeClass('selected')
+				.addClass('moving')
+				.find('.thumb-frame')
+					.stop()
+					.animate({'rotate': '0deg'},200, function(){
+							$(this).removeAttr('style');
+							$content.removeClass('aside moving');
+					});
 		} else {
-			$content.removeClass('selected');
-			$content.css('z-index','').find('.sub-content')
-				.delay(500)
-				.animate({
-					'marginLeft' : '0px', 'rotate': rotation+'deg'},400, function(){
-					$(this).parent().removeClass('aside');
-				});
-		} //$content.unbind('mouseleave').bind('mouseleave', downImage);
+			$content.removeClass('selected')
+			espera = setTimeout( function(){
+				$content
+					.addClass('moving')
+					.find('.thumb-frame')
+						.animate({'rotate': '0deg'},200, function(){
+							$(this).removeAttr('style');
+							$content.removeClass('aside moving selected');
+						});
+				$content.data('distance' , 1 );
+			}
+, 400);//end timeout
+			} //$content.unbind('mouseleave').bind('mouseleave', downImage);
 	}
 	
 	//resize function based on windows size

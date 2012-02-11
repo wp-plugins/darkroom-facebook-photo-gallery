@@ -1107,18 +1107,12 @@ function fb_display_main($content, $page_id) {
 
 			// loops through albums (former include) ---------------------------------
 
-?>
-            
-<div id="fp_body-gallery" class="captive">
-	<img id="fp_background" src="<?php echo FB_STYLE_URL.'_img/back.jpg'; ?>" alt=""/>
-			<a id="gallery_logo" href="<?php echo $albums[1]['link'] ; ?>" target="_blank">
-			<?php echo ( $fb_uselogo ) ? "<img src='$fb_logo_image' alt='Facebook user logo' />" : "Browse in Facebook"; ?>
-            </a>
-        
+?><div id="fp_placeholder">
+	<div id="fp_body-gallery" class="captive">
+	<img id="fp_background" src="<?php echo FB_STYLE_URL.'_img/back.jpg'; ?>" alt="darkroom back for gallery"/><a id="gallery_logo" title="Open Albums in Facebook" class="<?php echo (!$fb_uselogo) ? 'nologo':'';?>" href="<?php echo $albums[1]['link'] ; ?>" target="_blank"><?php echo ( $fb_uselogo ) ? "<img src='$fb_logo_image' alt='Facebook user logo' />" : "Browse in Facebook"; ?></a>
     <div id="fp_photo-description">
     	<div id="fp_report-content"></div>
     </div>
-    
     <div id="fp_gallery" class="fp_gallery">
         <div id="fp_loading" class="fp_loading"></div>
         <div id="fp_next" class="fp_next"></div>
@@ -1127,33 +1121,29 @@ function fb_display_main($content, $page_id) {
             <div id="line-left">
             	<div id="line-right"></div>
             </div>
-        </div>
-
-<?php if(sizeof($albums) > 0): ?>
+        </div><?php if(sizeof($albums) > 0): ?>
 	<div id="fp_thumbContainer">
 			<? $curr_album = 1;
 			foreach($albums as $album): 
 			$page_id = $albums[$curr_album]['page_id']; ?>
-			<div class="album" id="album-<?php echo $curr_album; ?>">
+			<div class="album" id="album-<?php echo $curr_album; ?>" style="left: <?php echo ($curr_album-1) * 100/sizeof($albums); ?>%; width: <?php echo 100/sizeof($albums) ?>%; ">
                 <div class="sub-album">
                         <?php echo fb_display_album($page_id); ?>
                 </div>
-                <div class="descr_cont">
-                    <div class="descr"><?php echo $album['name']; ?></div>
-                </div>
+                <div class="descr_cont"><p class="descr"><?php echo trim($album['name']); ?></p></div>
 			</div>
 			<?php $curr_album ++;
 			endforeach;
-			// end loop through albums ----------------------------------- ?>
-            
-		</div><!--end fp_tumbContainer-->
+			// end loop through albums ----------------------------------- 
+
+?></div><!--end fp_tumbContainer-->
   <? else : echo 'Facebook Darkroom loaded. No albums yet.'; 
   endif; ?>
 	</div><!--end fp_gallery--><?php if (!$fb_linkhate) : ?><a id="linklove" href="http://socialblogsitewebdesign.com/darkroom-facebook-photo-gallery" title="download this Facebook photo gallery for Facebook"><img src="<?php echo FB_STYLE_URL.'_img/SBWD_logo.png'; ?>" alt="powered by www.socialblogsitewebdesign.com" /></a>
 <?php else : ?>
     <img src="<?php echo FB_STYLE_URL.'_img/SBWD_logo.jpg'; ?>" id="linklove" alt="powered by www.socialblogsitewebdesign.com" />
 <?php endif ?>    
-</div><!--end fp_body_gallery-->
+</div></div><!--end fp_body_gallery-->
 
 <?	// now capture the buffer of rendered albums and return it to the page's content
 	$content = ob_get_clean();
@@ -1197,6 +1187,7 @@ function fb_display_album($page_id) {
 	$location = $album['location'];
 
 		// loops through photos ----------------------------------
+		$fb_curr_photo = 0;
 		foreach($photos as $key=>$photo):
 		$breaking_str = "\n\n";
 		$clean_caption = preg_replace('/[\r\n]+/', "\n\n", $photo['caption']);
@@ -1212,17 +1203,14 @@ function fb_display_album($page_id) {
 			$photo_keywords = $clean_caption;
 			$photo_report = '';
 		}
-?>
-            <div class="content rand-<?php echo rand(1,3); ?>">
+		
+		?><div class="content rand-<?php echo rand(1,3); ?>" style="left: <?php echo $fb_curr_photo * 100/sizeof($photos); ?>%;">
                 <div class="sub-content">
-                    <div class="thumb-frame">
-                    	<img src="<?php echo $photo['src'] ?>" rel="<?php echo $photo['src_big'] ?>" title="<?php echo $photo_keywords ?>" alt="<?php echo $photo_title ?>" />
-                        </div>
-                    <span><?php echo $photo_title ?></span>
-                </div>
-                <span class="pin"></span>
+                    <div class="thumb-frame"><img src="<?php echo $photo['src'] ?>" rel="<?php echo $photo['src_big'] ?>" title="<?php echo $photo_keywords ?>" alt="<?php echo $photo_title ?>" /></div><p class="fb_thumbtitle"><?php echo $photo_title ?></p></div>
+                <div class="pin"></div>
 					<div class="fp_photo-caption"><?php echo $photo_report; ?></div></div>
-		<?php endforeach;
+		<?php  $fb_curr_photo ++; 
+		endforeach;
 		// loops through photos ----------------------------------
 
 
@@ -1381,7 +1369,7 @@ div.sub-content {
 	left : -{$fb_hanging_point_x}px;
 	top: -{$fb_hanging_point_y}px ;
 }
-#fp_thumbContainer span.pin {
+#fp_thumbContainer div.pin {
 	left: -{$fb_pin_grip_x}px;
 	top: -{$fb_pin_grip_y}px ;
 }

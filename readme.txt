@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: facebook, photos, images, gallery, fotobook, import, widget, media, darkroom, developing, line, pin
 Requires at least: 2.6
 Tested up to: 3.3.1
-Stable tag: 1.4
+Stable tag: 1.5
 
 The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality.
 
@@ -73,6 +73,9 @@ To take advantage of SEO keywords, make sure you separate your Facebook photo ca
 2. This new style was the original idea achieved for a [famous Daylight Swordfishing Charter](http://www.floridakeysswordfishing.com) - soon online
 
 == Changelog ==
+
+= 1.5 = 
+Speed improved and temporary position of photos where hard-coded to prevent photos not distributing correctly along the line when they are not loaded fast enough!
 
 = 1.4 = 
 Optimized for speed
