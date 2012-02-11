@@ -1377,6 +1377,7 @@ div.sub-content {
 div.thumb-frame {
 	border-width: {$fb_photo_border}px;
 	$fb_other_side: 0px;
+	$fb_hanging_side : auto;
 }
 .vertical div.thumb-frame {
 	$fb_hanging_side : 0px;
