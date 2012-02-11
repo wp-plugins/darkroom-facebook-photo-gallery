@@ -43,6 +43,8 @@
 		$('body *').not('#fp_body-gallery, #fp_body-gallery *').removeClass('fb_hidden');
 		$('body').removeClass('fb_darkroom');
 		$('#fp_body-gallery').addClass('captive').prependTo($gallery_parent);
+		spread_albums();
+
 	});
 	
 
@@ -120,7 +122,7 @@
 			//imagenumber = $image.index();
 			//$('#debug').html( $('#debug').html() + '<br/>' + imagenumber );
 
-			$cadaimagen.attr('src', $image.attr('src')).parent().parent().transform({'rotate' : rotation + 'deg'});
+			$cadaimagen.parent().parent().transform({'rotate' : rotation + 'deg'});
 			$image.data('rotame', rotation );
 		});
 	});
