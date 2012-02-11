@@ -30,23 +30,7 @@
 	var rotating_point_x = hanging_point_x + photo_border;
 	var rotating_point_y = hanging_point_y + photo_border;
 
-	//
-	$('#expand_gallery').click( function() {
-		$gallery_parent = $('#fp_body-gallery').parent(); 
-		$('#fp_body-gallery').removeClass('captive').prependTo('body');
-		$('body').addClass('fb_darkroom');
-		$('body *').not('#fp_body-gallery, #fp_body-gallery *').addClass('fb_hidden');
-		spread_albums();
-	});
-
-	$('#collapse_gallery').click( function() {
-		$('body *').not('#fp_body-gallery, #fp_body-gallery *').removeClass('fb_hidden');
-		$('body').removeClass('fb_darkroom');
-		$('#fp_body-gallery').addClass('captive').prependTo($gallery_parent);
-		spread_albums();
-
-	});
-	
+	//	
 
 	function spread_albums() {
 		var required_width = nmb_albums*base_margin*2;
