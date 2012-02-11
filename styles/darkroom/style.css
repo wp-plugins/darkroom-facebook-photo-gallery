@@ -415,10 +415,10 @@ padding-left: 220px;
 	width: 30px;
 	height: 30px;
 	top: -15px;
-	-webkit-transform: rotate(-53); 
+	-webkit-transform: rotate(-53deg); 
 }
 .vertical.sub-content {
-	-webkit-transform: rotate(37); 
+	-webkit-transform: rotate(37deg); 
 }
 .decr_cont {
 	position: absolute;
