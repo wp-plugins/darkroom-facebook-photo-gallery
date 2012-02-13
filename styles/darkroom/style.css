@@ -446,8 +446,10 @@ padding-left: 220px;
 	position: relative;
 }
 
-.album:hover .descr_cont,
-.descr_cont:hover {
+.album:hover .descr_cont p,
+.descr_cont:hover p,
+.descr_cont p:hover,
+p.descr:hover {
 	background-color: #FFF;
 }
 #back_cont {
