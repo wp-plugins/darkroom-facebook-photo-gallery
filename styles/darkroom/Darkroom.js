@@ -1,5 +1,4 @@
-(function($) {
-  $(function() {
+jQuery(document).ready(function($) {
 	var ie 			= false;
 	if ($.browser.msie) {
 		ie = true;
@@ -30,8 +29,6 @@
 	var rotating_point_x = hanging_point_x + photo_border;
 	var rotating_point_y = hanging_point_y + photo_border;
 
-	//	
-
 	function spread_albums() {
 		var required_width = nmb_albums*base_margin*2;
 		var available_width = $('#fp_body-gallery').width();
@@ -53,8 +50,7 @@
 			//var current_album = $this.index();
 			var total_pic 	= $album.find('.content').length;
 			var album_width_px = images_width_px * total_pic + (margin_width*2);
-			//alert(available_width);
-			var album_width	= ( images_width_px > 0) ? album_width_px * 100 / $('#fp_body-gallery').width() : 100 / nmb_albums;
+			var album_width	= ( images_width_px > 0) ? album_width_px * 100 / available_width : 100 / nmb_albums ;
 
 			var album_left = $.previous_albums;
 
@@ -258,7 +254,9 @@
 			$loader.hide();
 			
 			//hide old report
-			$('#fp_report-content').fadeOut().html($.imgL_description);
+			$('#fp_report-content').fadeOut(400, function(){
+				$(this).html($.imgL_description);
+			});
 			
 			//slide up (also rotating) the large image
 			var r = Math.floor(Math.random()*21)-10;
@@ -276,7 +274,7 @@
 			});
 			
 			//show new report
-			$('#fp_report-content').fadeIn();
+			$('#fp_report-content').fadeIn(400);
 
 		}).error(function(){
 			//error loading image. Maybe show a message : 'no preview available'?
@@ -435,7 +433,4 @@
 			}
 		}
 		$image.css({'width':theImage.width+'px','height':theImage.height+'px'});
-	}
-  });
-})(jQuery);
-
+	}});
