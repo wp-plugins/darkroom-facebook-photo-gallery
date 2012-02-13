@@ -5,7 +5,7 @@ Plugin URI: http://socialblogsitewebdesign.com/wordpress_plugins/darkroom-facebo
 Description: The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality. Works with fb page albums. Requires PHP 5.
 Author: SocialBlogsite
 Author URI: http://socialblogsitewebdesign.com/about
-Version: 1.5
+Version: 1.6
 */
 
 /*
@@ -1118,7 +1118,8 @@ function fb_display_main($content, $page_id) {
 	<img id="fp_background" src="<?php echo FB_STYLE_URL.'_img/back.jpg'; ?>" alt="darkroom back for gallery"/><?php
     echo ( $fb_takeover_page || $fb_uselogo ) ? $fb_icon_home : $fb_icon_albums;
     ?><div id="fp_photo-description">
-    <?php if( is_dir(FB_PLUGIN_PATH . 'premium') ) include( FB_PLUGIN_PATH . 'premium/expand_buttons.php' ); ?>	
+    <?php if( is_dir(FB_PLUGIN_PATH . 'premium') ) include( FB_PLUGIN_PATH . 'premium/expand_buttons.php' );
+	if ( $fb_uselogo || $fb_takeover_page ) { echo $fb_icon_albums; } ?>	
     	<div id="fp_report-content"></div>
     </div>
     <div id="fp_gallery" class="fp_gallery">
