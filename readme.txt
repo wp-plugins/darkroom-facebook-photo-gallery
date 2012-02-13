@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: facebook, photos, images, gallery, fotobook, import, widget, media, darkroom, developing, line, pin
 Requires at least: 2.6
 Tested up to: 3.3.1
-Stable tag: 1.5
+Stable tag: 1.6
 
 The first Facebook Photo Album -to- jQuery-animated gallery for WordPress. Customizable in design and functionality.
 
@@ -64,8 +64,8 @@ It works better in fluid layouts. If you can, just copy your page's template and
 To take advantage of SEO keywords, make sure you separate your Facebook photo captions into three parts, with an empty line between them (two carriage returns) as follow:
 
 * **1st. line:** Photo title: Used for enlarged photo's caption and in thumbnail's alt attribute. Keep it as short as the photo's width.
-* **2nd. line:** SEO tags: Used in the title attribute (the one revealed when the image is hovered).
-* **3rd. line:** Photo description: Displayed at the top right of the gallery when an image is enlarged.
+* **2nd. line:** SEO tags: Used in the title attribute (the one revealed when the thumbnail is hovered).
+* **Rest of text:** Photo description: Displayed at the top right when a photo is clicked.
 
 == Screenshots ==
 
@@ -73,6 +73,9 @@ To take advantage of SEO keywords, make sure you separate your Facebook photo ca
 2. This new style was the original idea achieved for a [famous Daylight Swordfishing Charter](http://www.floridakeysswordfishing.com) - soon online
 
 == Changelog ==
+
+= 1.6 = 
+Fixed jQuery issues with jQuery versions used by other plugins which made albums not benign distributed some times. Fixed logo disappearing some themes. Fixed some CSS3 issues when hanging photos from right side.
 
 = 1.5 = 
 Speed improved and temporary position of photos where hard-coded to prevent photos not distributing correctly along the line when they are not loaded fast enough!

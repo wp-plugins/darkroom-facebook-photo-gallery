@@ -76,7 +76,7 @@ if (!$styles) $styles = "darkroom";
 if (isset($_POST['submit'])) {
 	fb_options_update_albums_page($_POST['fb_albums_page']);	
 	update_option('fb_number_rows', $_POST['fb_number_rows']);
-	//update_option('fb_style', $_POST['fb_style']);
+	//if (file_exists(FB_PLUGIN_PATH . 'premium/style_editor.php') ) update_option('fb_style', $_POST['fb_style']);
 	if($_POST['fb_number_cols'] != 0) {
 		update_option('fb_number_cols', $_POST['fb_number_cols']);
 	}
@@ -111,13 +111,13 @@ if (isset($_POST['submit'])) {
 	}
 	foreach($styles as $style) {
 		$stylesheet = FB_PLUGIN_PATH.'styles/'.$style.'/style.css';
-		if(is_writable($stylesheet) && file_exists(FB_PLUGIN_PATH.'style_editor.php') ) {
-			//file_put_contents($stylesheet, $_POST[$style.'_stylesheet']);
+		if(is_writable($stylesheet) && file_exists(FB_PLUGIN_PATH.'premium/style_editor.php') ) {
+			file_put_contents($stylesheet, $_POST[$style.'_stylesheet']);
 		}		
 	}
 	$sidebar_stylesheet = FB_PLUGIN_PATH.'styles/sidebar-style.css';
-	if(is_writable($sidebar_stylesheet)) {
-		//file_put_contents($sidebar_stylesheet, $_POST['sidebar_stylesheet']);
+	if(is_writable($sidebar_stylesheet) && file_exists(FB_PLUGIN_PATH.'premium/style_editor.php') ) {
+		file_put_contents($sidebar_stylesheet, $_POST['sidebar_stylesheet']);
 	}
 }
 
@@ -328,6 +328,13 @@ $fb_linkhate 		= get_option('fb_linkhate');
                     <small><?php _e('Maximum photo angle jitter (degrees)') ?></small>
                 </td>
             </tr>
+            <tr>
+                <th scope="row"><?php _e('Block link-back') ?></th>
+                <td>
+                    <label><input name="fb_linkhate" type="checkbox" value="1" <?php if($fb_linkhate) echo 'checked'; ?> />
+                    <small><?php _e('Check if a link back my site hurts you deeply') ?></small></label>
+                </td>
+            </tr>
             </table>
 		<h3><?php _e('Full-width options') ?></h3>
 	<table class="form-table">
@@ -336,32 +343,10 @@ $fb_linkhate 		= get_option('fb_linkhate');
 					<th scope="row"><?php _e('Show logo') ?></th>
 					<td>
 						<label><input name="fb_uselogo" type="checkbox" value="true" <?php if($fb_uselogo) echo ' checked'; ?> />
-<small><?php _e('Upload it below') ?></small></label>
+<small><?php _e(' Upload it below for Premium package or replace my_logo.png file'); ?></small></label>
 					</td>
-				</tr>
-                <tr>
-					<th scope="row"><?php _e('Takeover page') ?></th>
-					<td>
-						<label><input name="fb_takeover_page" type="checkbox" value="1" <?php if($fb_takeover_page) echo 'checked'; ?> />
-						<small><?php _e('Opens right in fullscreen mode (Faster gallery page: ignores your whole page)') ?></small></label>
-					</td>
-				</tr>
-                <tr>
-					<th scope="row"><?php _e('Logo File') ?></th>
-					<td>
-                        <input type="text" name="fb_logo_image" id="fb_logo_image" value="<?php echo $fb_logo_image; ?>" size="36" />
-                        <input id="upload_image_button" type="button" value="Upload Image" />
-
-						<small><?php _e('Upload') ?></small>
-					</td>
-				</tr>
-                <tr>
-					<th scope="row"><?php _e('Block link-back') ?></th>
-					<td>
-						<label><input name="fb_linkhate" type="checkbox" value="1" <?php if($fb_linkhate) echo 'checked'; ?> />
-						<small><?php _e('Check if a link back my site hurts you deeply') ?></small></label>
-					</td>
-				</tr>
+                </tr>
+			<?php if( is_dir(FB_PLUGIN_PATH . 'premium') ) include( FB_PLUGIN_PATH . 'premium/option_fields.php' ); ?>	
             </table>
 <?php //END darkroom settings ?>
 
@@ -387,7 +372,7 @@ $fb_linkhate 		= get_option('fb_linkhate');
 					<td>To setup automatic updates of your albums, create a cron job that regularly loads the following URL.	If you are unsure how to setup a cron job, <a href="http://www.google.com/search?q=cron">Google</a> is your friend.<br /> <small><?php echo fb_cron_url() ?></small></td>
 				</tr>
 			</table>
-<?php //if ( file_exists(FB_PLUGIN_PATH.'style_editor.php') ) include(FB_PLUGIN_PATH.'style_editor.php'); ?>		
+			<?php if( is_dir(FB_PLUGIN_PATH . 'premium') ) include( FB_PLUGIN_PATH . 'premium/style_editor.php' ); ?>	
 			<p class="submit">
 				<input type="submit" name="submit" value="<?php _e('Update Options') ?> &raquo;" />
 			</p>

@@ -470,7 +470,7 @@ class FacebookAPI {
 function fb_initialize() {
 	global $wpdb;
 	
-	$logo_url = FB_PLUGIN_URL.'images/logo.png';
+	$logo_url = FB_PLUGIN_URL.'my_logo.png';
 	// add default options
 	add_option('fb_version', FB_VERSION);
 	add_option('fb_albums_page', 0);
@@ -1042,7 +1042,7 @@ function fb_has_gallery() {
 
 function fb_change_template($template) {
   global $wp;
-  if ( fb_has_gallery() && get_option('fb_takeover_page')) {
+  if ( fb_has_gallery() && get_option('fb_takeover_page') && is_dir(FB_PLUGIN_PATH . 'premium') ) {
     return FB_PLUGIN_PATH . 'takeover.php';
   }
   else {
@@ -1104,13 +1104,21 @@ function fb_display_main($content, $page_id) {
 	array_unshift($albums, ''); // moves all the keys down
 	unset($albums[0]);
 
-
 			// loops through albums (former include) ---------------------------------
 
-?><div id="fp_placeholder">
-	<div id="fp_body-gallery" class="captive">
-	<img id="fp_background" src="<?php echo FB_STYLE_URL.'_img/back.jpg'; ?>" alt="darkroom back for gallery"/><a id="gallery_logo" title="Open Albums in Facebook" class="<?php echo (!$fb_uselogo) ? 'nologo':'';?>" href="<?php echo $albums[1]['link'] ; ?>" target="_blank"><?php echo ( $fb_uselogo ) ? "<img src='$fb_logo_image' alt='Facebook user logo' />" : "Browse in Facebook"; ?></a>
-    <div id="fp_photo-description">
+	$fb_uselogo = get_option('fb_uselogo');
+	$fb_takeover_page = get_option('fb_takeover_page');
+	$fb_logo_image = ( get_option('fb_logo_image') ) ? get_option('fb_logo_image') : FB_PLUGIN_URL.'my_logo.png';
+	$fb_logo_side_class = ( $fb_uselogo ) ? 'fb_logohome' : '' ;
+	$fb_icon_home = "<a id='logo_home' href='" . get_bloginfo('url') ."' title='Home'><img src='{$fb_logo_image}' alt='Facebook user logo' /></a>";
+	$fb_icon_albums = "<a id='fb_albums_icon' title='Open Albums in Facebook' href='{$albums[1]['link']} target='_blank'>Browse in Facebook</a>";
+	
+	?><div id="fp_placeholder">
+	<div id="fp_body-gallery" class="captive <?php echo $fb_logo_side_class ;?>">
+	<img id="fp_background" src="<?php echo FB_STYLE_URL.'_img/back.jpg'; ?>" alt="darkroom back for gallery"/><?php
+    echo ( $fb_takeover_page || $fb_uselogo ) ? $fb_icon_home : $fb_icon_albums;
+    ?><div id="fp_photo-description">
+    <?php if( is_dir(FB_PLUGIN_PATH . 'premium') ) include( FB_PLUGIN_PATH . 'premium/expand_buttons.php' ); ?>	
     	<div id="fp_report-content"></div>
     </div>
     <div id="fp_gallery" class="fp_gallery">
@@ -1361,7 +1369,8 @@ function fb_display_styles() {
 	$fb_other_side = ($fb_hanging_side == 'left') ? 'right' : 'left';
 	$overpin			= $fb_pin_grip_y - $fb_hanging_point_y;
 
-$darkroom_styles = "
+
+echo "
 <style type='text/css' media='screen'>
 div.sub-content {
 	width: {$fb_subcontent_width}px;
@@ -1386,12 +1395,10 @@ div.thumb-frame {
 #fp_thumbContainer .content {
 	top: {$fb_pin_grip_y}px;
 }
-</style>
-";
-	echo $darkroom_styles;
+</style>";
 
-	echo"
-<script type='text/javascript'>
+echo "
+	<script type='text/javascript'>
 	var photo_border = $fb_photo_border;
 	var hanging_side = '$fb_hanging_side';
 	var hanging_point_x = $fb_hanging_point_x;
@@ -1401,9 +1408,35 @@ div.thumb-frame {
 	var initial_angle = $fb_initial_angle;
 	var gravity = $fb_gravity;
 	var angle_randomness = $fb_angle_randomness;
-	var fullscreen_takeover = $fb_takeover_page;
-</script>
-";
+	</script>\n";
+}
+
+function fb_footer_scripts() {
+		$fb_takeover_page = get_option('fb_takeover_page');
+		$fb_takeover_page_code = ($fb_takeover_page) ? "\n expand_gallery();\n" : '' ;
+
+	if( is_dir(FB_PLUGIN_PATH . 'premium')) echo"
+<script type='text/javascript' defer='defer'>		
+jQuery(document).ready(function($) {
+	function expand_gallery(){
+		\$gallery_parent = $('#fp_body-gallery').parent(); 
+		$('#fp_body-gallery').removeClass('captive').prependTo('body');
+		$('body').addClass('fb_darkroom');
+		$('body *').not('#fp_body-gallery, #fp_body-gallery *').addClass('fb_hidden');
+		spread_albums();
+	}
+		$('#expand_gallery').click( expand_gallery );
+	
+		$('#collapse_gallery').click( function() {
+		$('body *').not('#fp_body-gallery, #fp_body-gallery *').removeClass('fb_hidden');
+		$('body').removeClass('fb_darkroom');
+		$('#fp_body-gallery').addClass('captive').prependTo(\$gallery_parent);
+		spread_albums();
+		})
+		
+		$fb_takeover_page_code
+});
+</script>\n" ;
 }
 
 //------------------------//
@@ -1713,8 +1746,11 @@ add_action('admin_menu', 'fb_add_pages');
 add_filter('the_content', 'fb_display');
 //add_action( 'wp_footer', 'fb_fullscreen' );
 add_action('widgets_init', 'fb_widget_init');
-add_action('template_redirect', 'fb_display_scripts');
+add_action('wp_enqueue_scripts', 'fb_display_scripts');
+add_action('template_redirect', 'fb_change_template');
 add_action('wp_print_styles', 'fb_display_styles');
+add_action('wp_print_scripts', 'fb_display_scripts');
+add_action('wp_print_footer_scripts', 'fb_footer_scripts');
 add_action('wp_ajax_fotobook', 'fb_ajax_handler');
 
 //---------------------//
