@@ -445,6 +445,11 @@ padding-left: 220px;
 	margin-top: 220px;
 	position: relative;
 }
+
+.album:hover .descr_cont,
+.descr_cont:hover {
+	background-color: #FFF;
+}
 #back_cont {
 	width: 50%;
 	padding-right: 180px;
