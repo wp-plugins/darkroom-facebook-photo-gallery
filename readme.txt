@@ -54,14 +54,14 @@ This installation is for any other than the easy "install" button at your Dashbo
 
 1. Download and unzip
 2. Upload the entire darkroom-facebook-photo-gallery folder to /your-wordpress-install-dir/wp-content/plugins/
-3. Login to your WP Admin panel, click Plugins, and activate Fotobook
-4. Go to Options and then click the Fotobook link. Follow the two steps for linking the plugin to a Facebook account.
-5. Now import your albums on the Manage / Fotobook page.
+3. Login to your WP Admin panel, click Plugins, and activate the plugin.
+4. Click "Darkroom" under your Dashboard settings menu or "Settings" action link in the Plugins list and follow the two steps for linking the plugin to a Facebook account.
+5. Click "Manage Albums" - link at the top - and import/organize your albums. You can drag-drop to sort them out, hide and show them.
 6. Upload your logo (or choose not to use it) and other options in the "Darkroom" Dashboard's settings page
 
-It works better in fluid layouts. If you can, just copy your page's template and make it fluid to use it with the gallery's page only. The more width is available the less-crowded the photos will appear when the albums get expanded.
+It works better in fluid layouts. If you can, just copy your page's template and make it fluid to use it with the gallery's page only. The more width is available the less-crowded the photos will appear when the albums gets expanded.
 
-To take advantage of SEO keywords, make sure you separate your Facebook photo captions into three parts, with an empty line between them (two carriage returns) as follow:
+To take enhance SEO and photo tagging, make sure you separate your Facebook photo captions into three parts, with an empty line between them (two carriage returns) as follow:
 
 * **1st. line:** Photo title: Used for enlarged photo's caption and in thumbnail's alt attribute. Keep it as short as the photo's width.
 * **2nd. line:** SEO tags: Used in the title attribute (the one revealed when the thumbnail is hovered).
